@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Search } from 'src/app/core/models/search/search';
+
 
 @Component({
   selector: 'app-search-character',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchCharacterComponent implements OnInit {
 
-  constructor() { }
+  @Output() public filters = new EventEmitter<Search>();
+  @Output() public tryLuck = new EventEmitter<boolean>();
+
+  characterId: string;
+  characterName: string;
+  characterStatus: string;
+  characterGender: string;
+
+  constructor() { 
+    this.characterId = ''
+    this.characterName = '';
+  }
 
   ngOnInit() {
   }
+
+  // Funciones del componentes
+
+ 
 
 }
