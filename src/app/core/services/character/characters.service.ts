@@ -9,13 +9,12 @@ import { Search } from '../../models/search/search';
 @Injectable({
   providedIn: 'root'
 })
-export class CharacterService {
+export class CharactersService {
 
   constructor(private http: HttpClient) { 
-
+    
   }
 
-  // Servicios
   findAllCharacters() {
     return this.http.get<any>(`${environment.RICKANDMORTY_API}/character/`);
   }
@@ -24,20 +23,20 @@ export class CharacterService {
     return this.http.get<any>(`${environment.RICKANDMORTY_API}/character/${ids}`);
   }
 
-  findFiltersAndPage(search: Search, page: number ): Observable<SearchResult<Character>> {
+  findByFiltersAndPage(search: Search, page: number): Observable<SearchResult<Character>> {
     let url = `${environment.RICKANDMORTY_API}/character?`;
-    if(search) {
-      if(search.name !== '') {
+    if (search) {
+      if (search.name !== '') {
         url += `name=${search.name}`;
       }
-      if(search.gender) {
+      if (search.gender) {
         url += url.includes('=') ? `&gender=${search.gender}` : `gender=${search.gender}`;
       }
-      if(search.status) {
+      if (search.status) {
         url += url.includes('=') ? `&status=${search.status}` : `status=${search.status}`;
       }
     } else {
-      url += `page=${page}`
+      url += `page=${page}`;
     }
     return this.http.get<any>(url);
   }

@@ -26,7 +26,24 @@ export class SearchCharacterComponent implements OnInit {
   }
 
   // Funciones del componentes
+  search(): void {
+    let search: Search = new Search();
+    search.id = this.getId();
+    search.name = this.characterName;
+    search.status = this.characterStatus;
+    search.gender = this.characterGender;
+    this.filters.emit(search);
+  }
 
- 
-
+  doTryLuck(): void {
+    this.tryLuck.emit(true);
+  }
+   
+  getId(): number {
+    let id = 0;
+    if(this.characterId && this.characterId !== '') {
+      id = parseFloat(this.characterId);
+    }
+    return id;
+  }
 }
